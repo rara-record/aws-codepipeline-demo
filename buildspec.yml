@@ -14,7 +14,10 @@ phases:
   build:
     commands:
       - echo "Building the Next.js app..."
-      - npm run build -- --standalone
+      - npm run build # 또는 yarn build, pnpm run build 등 프로젝트에 맞는 명령어 사용
+      - echo "Copying static files and build output..."
+      - cp -r public .next/standalone/public
+      - cp -r .next/static .next/standalone/.next/static
   post_build:
     commands:
       - echo Build Phase >> Build completed on `date`
@@ -24,4 +27,5 @@ artifacts:
     - '.next/**/*' # 빌드된 Next.js 애플리케이션 파일
     - 'public/**/*' # public 폴더 내의 정적 파일
     - 'package.json' # npm install을 위해 필요
-  discard-paths: yes
+  base-directory: 'path/to/artifacts' # 아티팩트의 기본 디렉토리
+  discard-paths: yes # 디렉토리 구조를 무시하고 파일만 업로드
