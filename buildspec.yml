@@ -14,7 +14,7 @@ phases:
   build:
     commands:
       - echo "Building the Next.js app..."
-      - next build --standalone
+      - npm run build -- --standalone
   post_build:
     commands:
       - echo Build Phase >> Build completed on `date`
