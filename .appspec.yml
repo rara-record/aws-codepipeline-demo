@@ -1,0 +1,24 @@
+version: 0.0
+os: linux
+
+files:
+  - source: / # S3 버킷의 압축 해제된 루트 디렉토리에서 파일을 가져옵니다
+    destination: /home/ec2-user/my-app #  EC2 인스턴스 내에서 빌드된 파일들이 복사될 실제 디렉토리
+    overwrite: true
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ec2-user # 실제 EC2 인스턴스에서 사용하는 사용자 이름과 일치해야 한다
+    group: ec2-user
+
+#  각 스크립트는 배포 프로세스 중에 실행되며,
+# 해당 스크립트들은 EC2 인스턴스에 존재하고 실행 가능한 상태여야 합니다.
+hooks:
+  BeforeInstall:
+    - location: scripts/setup.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStart:
+    - location: scripts/deploy.sh
+      timeout: 300
+      runas: ec2-user
