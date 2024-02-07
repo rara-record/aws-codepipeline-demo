@@ -9,7 +9,7 @@ phases:
     commands:
       - echo "Running linters and type checks..."
       - npm run typecheck
-  ## 빌드를 수행할 명령 입력
+  # 빌드를 수행할 명령 입력
   build:
     commands:
       - echo "Building the Next.js app..."
@@ -17,7 +17,7 @@ phases:
   post_build:
     commands:
       - echo Build Phase >> Build completed on `date`
-  ## S3 버킷으로 업로드
+  # S3 버킷으로 업로드
   artifacts:
     files:
       - '.next/**/*'
