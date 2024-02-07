@@ -17,15 +17,15 @@ phases:
   post_build:
     commands:
       - echo Build Phase >> Build completed on `date`
-  # S3 버킷으로 업로드
-  artifacts:
-    files:
-      - '.next/**/*'
-      - 'public/**/*'
-      - 'package.json'
-    packaging: zip
-    # https://nextjs.org/docs/pages/building-your-application/deploying/ci-build-caching#aws-codebuild
-    cache:
-      paths:
-        - 'node_modules/**/*'
-        - '.next/cache/**/*'
+# S3 버킷으로 업로드
+artifacts:
+  files:
+    - '.next/**/*'
+    - 'public/**/*'
+    - 'package.json'
+  packaging: zip
+  # https://nextjs.org/docs/pages/building-your-application/deploying/ci-build-caching#aws-codebuild
+  cache:
+    paths:
+      - 'node_modules/**/*'
+      - '.next/cache/**/*'
